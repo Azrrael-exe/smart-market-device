@@ -5,6 +5,7 @@ import resHandler from './utils/ResHandler'
 import settings from './config/Settings'
 import Logger from './utils/Logger'
 import SocketServer from './socket/Server'
+import board from './board/board'
 
 const app = express()
 

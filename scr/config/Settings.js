@@ -7,6 +7,8 @@ const {
   PORT,
   DEBUG,
   SOCKET_SERVER,
+  SERIAL_PORT,
+  EVENT_KEY
 } = process.env
 
 const settings = {
@@ -15,6 +17,8 @@ const settings = {
   DEBUG: DEBUG || true,
   PORT: PORT || 3000,
   SOCKET_SERVER: SOCKET_SERVER || `http://localhost:${PORT}`,
+  SERIAL_PORT: SERIAL_PORT || '/dev/ttyACM0',
+  EVENT_KEY: EVENT_KEY || 'button-report',
   BASE_PATH: `/api/${APP_NAME}`,
   DEPLOYED_AT: new Date().toISOString()
 }
