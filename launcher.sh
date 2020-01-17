@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd /home/pi/Dev/Dev/smart-market-device
+
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
