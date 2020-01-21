@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const APP_NAME = 'smart-market-device'
-const APP_VERSION = '1.0.0'
+const APP_VERSION = '1.1.1'
 
 const {
   PORT,
