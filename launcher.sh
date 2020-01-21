@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/pi/Dev/Dev/smart-market-device
+cd /home/pi/Dev/smart-market-device
 
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
