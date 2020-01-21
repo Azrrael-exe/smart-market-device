@@ -1,24 +1,30 @@
 import Serialport from 'serialport'
-import Firmata from 'firmata'
 import Logger from '../utils/Logger'
 import socket from '../socket/Client'
+import LlpParser from './ll_parser'
 
 import { SERIAL_PORT, EVENT_KEY } from '../config/Settings'
 
-const serialport = new Serialport(SERIAL_PORT, {
-    baudRate: 57600
+const port = new Serialport(SERIAL_PORT, {
+    baudRate: 115200
 })
 
-const board = new Firmata(serialport, () => {
-    Logger.info('Arduino ready!')
-    board.pinMode(7, board.MODES.INPUT);
+const parser = new LlpParser(0x7E)
+port.pipe(parser)
 
-    board.digitalRead(7, (value) => {
-        if(value){
-            Logger.info('Sending socket event!')
-            socket.emit(EVENT_KEY, 'ON')
-        }
-    });
+
+const sendResponse = () => {
+    var ok_response = [0x7E, 0x06, 0x0A, 0x00, 0x01, 0x0B, 0x00, 0xC8, 0x21]
+    var err_response = [0x7E, 0x06, 0x0A, 0x00, 0x01, 0x0B, 0x01, 0x90, 0x58]
+    var responses = [ok_response, err_response]
+    var response = responses[Math.floor(Math.random() * responses.length)];
+    
+    port.write(Buffer.from(response))
+}
+
+parser.on('data', payload => {
+    socket.emit(EVENT_KEY, 'ON')
+    setTimeout(sendResponse, 5000);
 })
 
-module.exports = board
+module.exports = parser
