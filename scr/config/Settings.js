@@ -14,7 +14,7 @@ const {
 const settings = {
   APP_NAME,
   APP_VERSION,
-  DEBUG: DEBUG || true,
+  DEBUG: (DEBUG === 'true'),
   PORT: PORT || 3000,
   SOCKET_SERVER: SOCKET_SERVER || `http://localhost:${PORT}`,
   SERIAL_PORT: SERIAL_PORT || '/dev/ttyACM0',
